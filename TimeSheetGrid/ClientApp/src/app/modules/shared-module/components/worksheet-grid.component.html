@@ -1,0 +1,68 @@
+<div class="col-12">
+
+
+
+
+  <div class="row maringtop">
+
+
+    <div class="card ">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-1">
+            <input type="button" value="New" class="btn btn-primary" (click)="onAddNewRow();" />
+
+          </div>
+          <div class="col-1">
+            <input type="button" value="Submit" class="btn btn-primary" (click)="onTimeSheetSubmit();" />
+          </div>
+          <div class="col-8" style="text-align:right">
+
+            <strong>Default Hourly Rate: </strong>
+          </div>
+          <div class="col-2">
+            <span class="readonly">$ {{defaultHourlyRate}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row nomargin">
+    <div class="col-1 heading">State</div>
+    <div class="col-2 heading">Title</div>
+    <div class="col-2 heading">Type</div>
+    <div class="col-2 heading">Duration</div>
+    <div class="col-2 heading">Hourly Rate</div>
+    <div class="col-1 heading text-right">Total</div>
+    <div class="col-2 heading"></div>
+  </div>
+  <div worksheet-row *ngIf="isAddMode" [rowData]="workSheetNewRow" [rowMode]="rowMode.Add"
+       (rowAdded)='onRowAdd($event)' (rowCancelled)='onRowCancelled($event)' class="row nomargin border-bottom"></div>
+
+  <div *ngFor="let rows of workSheetData">
+    <div [ngClass]="(rows.recordId==selectedRecordId && rows.state==1 )?'selectedRow row nomargin maringtop-row border-bottom':'row nomargin maringtop-row border-bottom'" *ngIf="rows.recordId!=editRecordId" (click)="onRowSelect(rows.recordId)">
+      <div class="col-1">{{rows.state==1?"Active":"Submitted"}}</div>
+      <div class="col-2">{{rows.title}}</div>
+      <div class="col-2">{{rows.type}}</div>
+      <div class="col-2">{{rows.duration}}</div>
+      <div class="col-1">{{rows.hourlyrate}}</div>
+      <div class="col-2 text-right">${{rows.total}}</div>
+      <div class="col-2 text-right">
+        <input *ngIf="rows.state==1" type="button" class="btn btn-primary margin-bottom" value="Edit" (click)="onRowEdit(rows)" />
+        <input *ngIf="rows.state==1" type="button" class="btn btn-danger margin-bottom margin-left" value="Delete" (click)="onRowDelet(rows.recordId)" />
+      </div>
+    </div>
+    <div worksheet-row *ngIf="rows.recordId==editRecordId" [rowData]="rows"
+         [rowMode]="rowMode.Edit" (rowUpdated)='onRowUpdate($event)' (rowCancelled)='onRowCancelled($event)' class="row nomargin border-bottom">
+    </div>
+  </div>
+  <div *ngIf="workSheetData.length==0" style="text-align:center">
+    <p>No record(s) found. click New button to add a new entry to the work sheet.</p>
+     
+  </div>
+
+
+  <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+</div>
+

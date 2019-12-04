@@ -1,0 +1,54 @@
+
+<form [formGroup]="WorkSheetEntryForm" (ngSubmit)="onSubmit()" style="width:100%">
+  <div class="row nomargin maringtop-row">
+    <div class="col-1">
+      {{rowData.state==1?"Active":"Submitted"}}
+    </div>
+      <div class="col-2">
+        <input type="text" formControlName="title" style="width:90%" />
+        <div *ngIf="submitted && workSheetForm.title.errors">
+          <div *ngIf="workSheetForm.title.errors.required" class="error" >Title is required</div>
+        </div>
+      </div>
+      <div class="col-2">
+        <p-dropdown [options]="workType"
+                    optionLabel="name"
+                    placeholder="Please select a Type"
+                    formControlName="type"
+                    defaultLabel="Select Type"
+                    [showClear]="true" [filter]="true" [autoWidth]="false"></p-dropdown>
+
+        <div *ngIf="submitted && workSheetForm.type.errors">
+          <div *ngIf="workSheetForm.type.errors.required" class="error"  >Type is required</div>
+        </div>
+      </div>
+      <div class="col-2">
+        <input type="text" formControlName="duration" style="width:70%" />
+        <div *ngIf="submitted && workSheetForm.duration.errors">
+          <div *ngIf="workSheetForm.duration.errors.required" class="error">Duration is required</div>
+          <div *ngIf="workSheetForm.duration.errors.pattern" class="error"> Please enter a duration in hh:mm format</div>
+
+        </div>
+      </div>
+      <div class="col-2">
+        <input type="text" formControlName="hourlyrate" style="width:70%" />
+        <div *ngIf="submitted && workSheetForm.hourlyrate.errors" class="error">
+          Please enter a valid number for hourly rate
+        </div>
+      </div>
+      <div class="col-1 text-right">
+        <span class="readonly">
+          ${{calculateTotal}}
+        </span>
+
+      </div>
+      <div class="col-2 text-right">
+
+        <input type="submit" class="btn btn-primary margin-bottom" value="Save"  />
+      
+        <input type="button" class="btn btn-secondary margin-bottom margin-left" value="Cancel" (click)="onRowCancelled();" />
+      </div>
+    </div>
+</form>
+
+

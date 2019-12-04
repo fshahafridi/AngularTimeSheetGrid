@@ -1,0 +1,38 @@
+{
+  "data": [
+    {
+      "recordId": 1,
+      "state": 1,
+      "title": "working on R&D",
+      "type": "Research",
+      "typeId": "2",
+      "duration": "4",
+      "defaultRate": 205.15,
+      "hourlyrate": "3",
+      "total": "345"
+    },
+    {
+      "recordId": 2,
+      "state": 2,
+      "title": "working on R&D",
+      "type": "Research",
+      "typeId": "2",
+      "duration": "4",
+      "defaultRate": 205.15,
+      "hourlyrate": "3",
+      "total": "345"
+    },
+    {
+      "recordId": 3,
+      "state": 1,
+      "title": "working on R&D",
+      "type": "Research",
+      "typeId": "2",
+      "duration": "4",
+      "defaultRate": 205.15,
+      "hourlyrate": "3",
+      "total": "345"
+    }
+  ]
+}
+
