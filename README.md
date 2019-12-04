@@ -1,4 +1,4 @@
-# Angular custom Grid implemention for TimeSheet
+# Angular custom Grid implementation for TimeSheet
 
 The sample application works as per the following specifications.
 
